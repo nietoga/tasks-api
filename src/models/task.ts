@@ -1,16 +1,9 @@
 import mongoose, { Types } from "mongoose";
-import { nanoid } from "nanoid";
 
 // --- Mongoose Schema ---
 const TaskSchema = new mongoose.Schema(
   {
-    publicId: {
-      type: String,
-      unique: true,
-      index: true,
-      default: () => `tsk_${nanoid(8)}`,
-    },
-    parentId: { type: String, default: null },
+    parentId: { type: mongoose.Types.ObjectId, ref: "Task", default: null },
     title: { type: String, required: true },
     description: { type: String, default: null },
     status: {
